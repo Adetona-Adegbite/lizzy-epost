@@ -55,7 +55,11 @@ export default function SignUp() {
         <label>Email</label>
         <input onChange={(e) => setEmail(e.target.value)} value={email} />
         <label>Password</label>
-        <input onChange={(e) => setPassword(e.target.value)} value={password} />
+        <input
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+        />
         {loading ? (
           <button disabled={true}>Loading...</button>
         ) : (

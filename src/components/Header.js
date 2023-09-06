@@ -18,6 +18,7 @@ export default function Header() {
       setIsOpen(false);
       controls.start("closed");
     }
+    setUsername(cookies.get("username") || "Guest");
   }, [location]);
 
   const toggleMenu = () => {
@@ -30,10 +31,7 @@ export default function Header() {
     cookies.remove("username");
     cookies.remove("auth-token");
   }
-  const [username, setUsername] = useState(cookies.get("username"));
-  useEffect(() => {
-    setUsername(cookies.get("username") || "Guest");
-  }, [username]);
+  const [username, setUsername] = useState("Guest");
   return (
     <>
       <div className={classes.nav}>
