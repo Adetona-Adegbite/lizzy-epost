@@ -63,10 +63,14 @@ export default function SignUp() {
         {loading ? (
           <button disabled={true}>Loading...</button>
         ) : (
-          <button className={classes.sign}>Sign Up</button>
+          <button type="submit" className={classes.sign}>
+            Sign Up
+          </button>
         )}
         <div className={classes.buttons}>
-          <button onSubmit={googleAuth}>Sign Up With Google</button>
+          <button type="button" onSubmit={googleAuth}>
+            Sign Up With Google
+          </button>
         </div>
         <Link to="/">Sign in to Account</Link>
       </form>
