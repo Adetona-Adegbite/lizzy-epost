@@ -2,14 +2,15 @@ import { useState } from "react";
 import classes from "../styles/Postcode.module.css";
 import axios from "axios";
 async function getGeoLocation(locationName) {
-  const apiKey = process.env.APIKEY;
+  const apiKey = process.env.REACT_APP_API_KEY;
+  console.log(apiKey);
   const encodedLocationName = encodeURIComponent(locationName);
   // console.log(encodedLocationName);
   const geocodingEndpoint =
     "https://maps.googleapis.com/maps/api/geocode/json?address=" +
     encodedLocationName +
-    "&key=" +
-    apiKey;
+    "&key="+apiKey;
+
   try {
     const response = await axios.get(geocodingEndpoint);
     const results = response.data.results;
@@ -46,16 +47,20 @@ export default function PostCode() {
     const response = await getGeoLocation(location);
     console.log(response);
     setAddress(response.address);
-    if (response.ok) {
+    console.log(response.longitude);
+    try {
       const postcodeResponse = await getPostalCode(
         response.longitude,
         response.latitude
       );
+      console.log(postcodeResponse);
       setPostcode(postcodeResponse);
-    } else {
+    } catch (e) {
+      console.log(e);
       setError("An error occured. Try another Location");
+
+      setLoading(false);
     }
-    setLoading(false);
   }
   return (
     <div className={classes["postcode-card"]}>
@@ -69,8 +74,8 @@ export default function PostCode() {
         <input
           type="text"
           size="20"
-          tabindex="100"
-          autocomplete="off"
+          tabIndex="100"
+          autoComplete="off"
           onChange={(e) => setLocation(e.target.value)}
           placeholder="Enter a Town in UK"
         />
