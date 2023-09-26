@@ -15,7 +15,7 @@ export default function SignUp() {
       .then((cred) => {
         cookies.set("auth-token", cred.user.refreshToken);
         cookies.set("username", username);
-        navigate("home");
+        navigate("/home");
         setLoading(false);
       })
       .catch((e) => {
