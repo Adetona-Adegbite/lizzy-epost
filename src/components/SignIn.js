@@ -14,7 +14,7 @@ export default function SignIn() {
       .then((cred) => {
         cookies.set("auth-token", cred.user.refreshToken);
         cookies.set("username", username);
-        navigate("home");
+        navigate("/home");
         setLoading(false);
       })
       .catch((e) => {
@@ -51,14 +51,22 @@ export default function SignIn() {
         <label>Email</label>
         <input onChange={(e) => setEmail(e.target.value)} value={email} />
         <label>Password</label>
-        <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} />
+        <input
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+        />
         {loading ? (
           <button disabled={true}>Loading...</button>
         ) : (
-          <button className={classes.sign}>Sign In</button>
+          <button type="submit" className={classes.sign}>
+            Sign In
+          </button>
         )}
         <div className={classes.buttons}>
-          <button onClick={googleAuth}>Sign In With Google</button>
+          <button type="button" onClick={googleAuth}>
+            Sign In With Google
+          </button>
         </div>
         <Link to="signup">Create an Account</Link>
       </form>
